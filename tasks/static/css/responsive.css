@@ -1,0 +1,53 @@
+/* responsive.css actualizado para que coincida con la imagen */
+
+@media (max-width: 1024px) {
+  .container {
+      flex-direction: column;
+  }
+  .sidebar {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #ddd;
+  }
+  .main-content {
+      padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .header-buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+  }
+  .sidebar {
+      width: 100%;
+      padding: 15px;
+  }
+  .invite-box input {
+      padding: 8px;
+  }
+  .invite-btn, .share-btn, .tweet-btn {
+      font-size: 12px;
+      padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-buttons button {
+      width: 100%;
+      margin-bottom: 5px;
+  }
+  .invite-box input {
+      font-size: 14px;
+  }
+  .add-friend {
+      font-size: 14px;
+      padding: 10px;
+  }
+}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width: 600px; margin: 100px auto; background-color: #1c1c1c; padding: 30px; border-radius: 12px; color: white;">
+  <h2>➕ Crear nueva sesión</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="modo_propina">¿Cómo deseas calcular la propina?</label>
+    <select name="modo_propina" required style="margin-top: 10px; padding: 8px; width: 100%; border-radius: 6px;">
+      <option value="manual">🖊️ Manual</option>
+      <option value="ruleta">🎲 Ruleta</option>
+    </select>
+    <br><br>
+    <button type="submit" class="btn-orange">Crear sesión</button>
+    <a href="{% url 'dashboard' %}" class="btn-grey">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

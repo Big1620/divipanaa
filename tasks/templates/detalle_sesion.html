@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div style="padding: 80px;">
+    <h2>🧾 Detalles de la sesión {{ sesion.id }}</h2>
+
+    <h3>Gastos</h3>
+    {% if gastos %}
+      <ul>
+        {% for gasto in gastos %}
+          <li>{{ gasto.usuario.nombre }} pagó ${{ gasto.monto }} por {{ gasto.descripcion }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No hay gastos aún.</p>
+    {% endif %}
+
+    <h3>Participantes</h3>
+    <ul>
+      {% for p in participantes %}
+        <li>{{ p.usuario.nombre }} {% if p.monto_a_pagar %} (Debe ${{ p.monto_a_pagar }}) {% endif %}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
