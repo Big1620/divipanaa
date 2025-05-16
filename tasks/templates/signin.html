@@ -1,6 +1,84 @@
 {% extends 'base.html'%}
 {% load static %} 
 {% block content %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+.form-containerr {
+  position: relative;
+  width: 500px;
+  background: #000;
+  box-shadow: 0 0 50px 5;
+  border-radius: 20px;
+  padding: 40px;
+  overflow: hidden;
+  margin: 40px auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-containerr h1 {
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-containerr form p {
+  position: relative;
+  margin: 30px 0;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+}
+
+.form-containerr form p label {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.form-containerr form p input {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 0 5px;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.form-containerr button {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  background: rgb(40, 61, 42);
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+  font-size: 16px;
+  color: #000;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  margin-top: 15px;
+}
+
+.form-containerr .errorlist, 
+.form-containerr .error {
+  color: #ff3860;
+  font-size: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 5px 0;
+}
+
+.form-containerr > .error {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #ff3860;
+}
+</style>
 <div class="form-containerr">
   <h1>Inicia Sesión</h1>
   {{error}}
