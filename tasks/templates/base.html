@@ -1,11 +1,16 @@
 {% load static %}
-{% load static %} 
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Divipana</title>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- Estilos CSS desde /static/css/ -->
     <link rel="stylesheet" href="{% static 'css/signresponsive.css' %}">
     <link rel="stylesheet" href="{% static 'css/signstyles.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -13,8 +18,6 @@
     <link rel="stylesheet" href="{% static 'css/hstyles.css' %}">
     <link rel="stylesheet" href="{% static 'css/hresponsive.css' %}">
     <link rel="stylesheet" href="{% static 'css/hanimations.css' %}">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
     <style>
     @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400');
 
@@ -245,13 +248,11 @@ nav ul li a:hover {
         <ul class="nav-left">
             <li class="logo-container">
                 <a href="/">
-                    {% load static %}
                     <button class="logo-btn" onclick="location.href='/'"></button>
                     <img src="{% static 'images/LOGO2.png' %}" alt="logo" class="logo" style="width: 100px; height: auto;">
                 </a>
             </li>
 
-            <!-- Botón Inicio -->
             <li>
                 <div class="button-container-1">
                     <a href="/" class="user-button">
@@ -264,7 +265,6 @@ nav ul li a:hover {
                 </div>
             </li>
 
-            <!-- Botón Dashboard -->
             {% if user.is_authenticated %}
             <li>
                 <div class="button-container-1">
@@ -280,7 +280,6 @@ nav ul li a:hover {
             {% endif %}
         </ul>
 
-        <!-- Menú Usuario -->
         {% if user.is_authenticated %}
         <div class="user-menu">
             <div class="button-container-1">
@@ -292,7 +291,6 @@ nav ul li a:hover {
                     </div>
                 </button>
             </div>
-
         </div>
         <div class="dropdown-menu" id="dropdown">
             <a href="{% url 'logout' %}">Cerrar sesión</a>
@@ -305,29 +303,26 @@ nav ul li a:hover {
         {% endif %}
     </nav>
 
-
-    {% block content %} 
+    {% block content %}
     {% endblock %}
 
     <script>
-    function toggleMenu() {
-        var menu = document.getElementById("dropdown");
-        menu.style.display = (menu.style.display === "block") ? "none" : "block";
-    }
+        function toggleMenu() {
+            var menu = document.getElementById("dropdown");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
 
-    window.onclick = function(event) {
-        if (!event.target.closest('.user-menu')) {
-            var dropdowns = document.getElementsByClassName("dropdown-menu");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.style.display === "block") {
-                    openDropdown.style.display = "none";
+        window.onclick = function(event) {
+            if (!event.target.closest('.user-menu')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
                 }
             }
         }
-    }
-
-    
     </script>
 </body>
 </html>
