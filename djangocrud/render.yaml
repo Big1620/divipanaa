@@ -1,0 +1,22 @@
+databases:
+  - name: divipanadb
+    plan: free
+    databaseName: divipana_db
+    user: divipana_user
+
+services:
+  - type: web
+    name: divipana-app
+    plan: free
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn djangocrud.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: divipanadb
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4

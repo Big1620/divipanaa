@@ -1,13 +1,18 @@
 from pathlib import Path
 import os
-
+import dj_database_url 
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Seguridad
-SECRET_KEY = 'django-insecure-2*hnji5bk0e55*&-$a(vw9@a_zwp$%wcz%999sf!)b145&d_h8'
-DEBUG = True
+SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
+
+DEBUG = 'RENDER' not in os.environ
 ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Redirección después de login
 LOGIN_REDIRECT_URL = 'sesiones'
@@ -49,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 # URLs
@@ -76,10 +82,11 @@ WSGI_APPLICATION = 'djangocrud.wsgi.application'
 
 # Base de datos
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Divipana',
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        conn_max_age=600
+    )
 }
 
 # Validación de contraseñas
@@ -98,6 +105,15 @@ USE_TZ = True
 
 # Archivos estáticos
 STATIC_URL = '/static/'
+
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
